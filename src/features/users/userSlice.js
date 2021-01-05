@@ -22,7 +22,7 @@ export const userSlice = createSlice({
     },
 });
 
-export const { setName, setPosition, setSecurityLevel, submitEmployee } = userSlice.actions;
+export const { setName, setPosition, setSecurityLevel } = userSlice.actions;
 
 
 // The function below is called a thunk and allows us to perform async logic. It

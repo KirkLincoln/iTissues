@@ -37,6 +37,35 @@ li a {
   text-decoration: none;
 }
 
+body {
+  background-color: rgba(255,219,167,.2);
+  text-align: center;
+
+}
+
+ul {
+  background-color: rgba(255,219,167,1);
+  list-style-type: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+}
+
+li {
+  float: left;
+
+}
+
+li a {
+  display: block;
+  color: rgb(20, 72, 217);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
 /* Change the link color to #111 (black) on hover */
 li a:hover {
   background-color: rgb(76, 99, 182);

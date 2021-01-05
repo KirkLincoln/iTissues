@@ -54,7 +54,7 @@ export const homeSlice = createSlice({
     },
 });
 
-export const { setIssue } = homeSlice.actions;
+export const { setIssue, submitEmployee } = homeSlice.actions;
 
 export const selectIssue = state => state.issue;
 

@@ -62,7 +62,7 @@ export function Home() {
     //sendStateToDB(table).then(r => table = r);
 
     console.log(table);
-return (
+    return (
         <div>
             <h1 className={styles.row}>Current Work Orders</h1>
             <div className={styles.row}>
@@ -102,7 +102,5 @@ const workOrders = ledger => {
             )
         })
     return table;
-    }
-
-;
+};
 

@@ -12,12 +12,7 @@ function App() {
   return (
     <div className="App">
         <NavBar />
-<<<<<<< HEAD
-        <header className="App-header">
-=======
       <header className="App-header">
-
->>>>>>> main
               <Switch>
                   <Route exact path="/" component={Home}/>
                   <Route path="/work-order" component={Issue}/>
