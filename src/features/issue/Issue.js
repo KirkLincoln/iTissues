@@ -61,7 +61,7 @@ export function Issue() {
                             date={chosenDate} // momentPropTypes.momentObj or null
                             onDateChange={
                                 date => {
-                                    dispatch(setDeadline(moment(date).format('MMMM d, YYYY')));
+                                    dispatch(setDeadline(moment(date).format('L')));
                                     setChosenDate(date);
                                 }
                             } // PropTypes.func.isRequired

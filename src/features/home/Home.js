@@ -4,7 +4,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import styles from './Home.module.css';
 import axios from 'axios';
 
-const { loadState } = require('../../App.js');
+const { loadState } = require('../../utils/LocalStorageHelpers');
 
 
 

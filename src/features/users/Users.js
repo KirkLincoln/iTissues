@@ -14,7 +14,7 @@ import styles from './User.module.css';
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
 
-const { loadState } = require('../../App');
+const { loadState } = require('../../utils/LocalStorageHelpers');
 
 export function Users() {
     const employee = useSelector(submitEmployee);

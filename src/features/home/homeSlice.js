@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loadState } from '../../utils/LocalStorageHelpers';
 const { uuid } = require('uuidv4');
-const { loadState } = require('../../App.js');
 
 const saveState = async (state, token) => {
     try {
