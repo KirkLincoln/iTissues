@@ -1,26 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 const { uuid } = require('uuidv4');
-
-const loadState = () => {
-    try {
-        let ledger = [];
-        for (let i = 0; i < localStorage.length; i++) {
-            let serializedStateKey = localStorage.key(i);
-            if(!serializedStateKey.search('ticketState')) {
-                ledger.push(localStorage.getItem(serializedStateKey))
-            }
-        }
-        const serializedState = "";
-        if (serializedState === null) {
-            return undefined;
-        }
-        console.log(ledger);
-        return ledger;
-        //return JSON.parse(serializedState);
-    } catch (err) {
-        return undefined;
-    }
-};
+const { loadState } = require('../../App.js');
 
 const saveState = async (state, token) => {
     try {
@@ -45,7 +25,7 @@ export const homeSlice = createSlice({
 
         },
         submitEmployee: (state, action) => {
-                saveState(action.payload, 'emplState').then(
+                saveState(action.payload, 'userState').then(
                     res => {
                         return res;
                     }

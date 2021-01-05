@@ -14,6 +14,7 @@ import styles from './User.module.css';
 import { Redirect } from 'react-router-dom';
 import axios from "axios";
 
+const { loadState } = require('../../App');
 
 export function Users() {
     const employee = useSelector(submitEmployee);
@@ -45,7 +46,9 @@ export function Users() {
                 </label>
                 <label>
                     Security Level:
-                    <select>
+                    <select
+                        onChange={event => {event.persist(); dispatch(setSecurityLevel(event.target.value))}}
+                    >
                         <option value="1">I</option>
                         <option value="2">II</option>
                         <option value="3">III</option>
@@ -69,39 +72,8 @@ export function Users() {
     );
 }
 
-const sendStateToDB = async state => {
-    await axios({
-        method: 'post',
-        url: 'http://localhost:5000/api/world',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-type': 'application/json',
-        },
-        data: {
-            state
-        }
-    })
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-}
-
-const recieveDataFromDB = async () => {
-    await axios.get('http://localhost:5000/api/hello')
-        .then((response) => {
-            return response;
-        })
-        .catch((error) => {
-            console.error(error);
-            return undefined;
-        });
-};
-
-export function Home() {
-    const table = loadState(); //<--- recieveDataFromDB().then(r => table = r)
+export function UsersTable() {
+    const table = loadState('userState'); //<--- recieveDataFromDB().then(r => table = r)
     //sendStateToDB(table).then(r => table = r);
 
     console.log(table);
@@ -111,7 +83,7 @@ export function Home() {
             <div className={styles.row}>
                 <table>
                     <tbody>
-                    {workOrders(table)}
+                    {usersRoster(table)}
                     </tbody>
                 </table>
             </div>
@@ -119,7 +91,7 @@ export function Home() {
     );
 }
 
-const workOrders = ledger => {
+const usersRoster = ledger => {
     console.log(ledger);
     const table = [];
     const temp = [];

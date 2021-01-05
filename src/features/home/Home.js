@@ -4,64 +4,15 @@ import 'react-dates/lib/css/_datepicker.css';
 import styles from './Home.module.css';
 import axios from 'axios';
 
+const { loadState } = require('../../App.js');
 
-const loadState = () => {
-    try {
-        let ledger = [];
-        for (let i = 0; i < localStorage.length; i++) {
-            let serializedStateKey = localStorage.key(i);
-            if(!serializedStateKey.search('ticketState')) {
-                ledger.push(localStorage.getItem(serializedStateKey))
-            }
-        }
-        const serializedState = "";
-        if (serializedState === null) {
-            return undefined;
-        }
-        console.log(ledger);
-        return ledger;
-        //return JSON.parse(serializedState);
-    } catch (err) {
-        return undefined;
-    }
-};
 
-const sendStateToDB = async state => {
-    await axios({
-        method: 'post',
-        url: 'http://localhost:5000/api/world',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-type': 'application/json',
-        },
-        data: {
-            state
-        }
-    })
-    .then((response) => {
-        console.log(response);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-}
-
-const recieveDataFromDB = async () => {
-    await axios.get('http://localhost:5000/api/hello')
-        .then((response) => {
-            return response;
-        })
-        .catch((error) => {
-            console.error(error);
-            return undefined;
-        });
-};
 
 export function Home() {
-    const table = loadState(); //<--- recieveDataFromDB().then(r => table = r)
+    const table = loadState('ticketState'); //<--- recieveDataFromDB().then(r => table = r)
     //sendStateToDB(table).then(r => table = r);
-
-    console.log(table);
+    const users = loadState('userState');
+    console.log(users)
     return (
         <div>
             <h1 className={styles.row}>Current Work Orders</h1>
@@ -69,6 +20,13 @@ export function Home() {
                 <table>
                     <tbody>
                     {workOrders(table)}
+
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                    {userRoster(users)}
                     </tbody>
                 </table>
             </div>
@@ -76,13 +34,40 @@ export function Home() {
     );
 }
 
-const workOrders = ledger => {
-    console.log(ledger);
+const userRoster = ledger => {
     const table = [];
     const temp = [];
     ledger.forEach(e => temp.push(JSON.parse(e)))
-        temp.forEach(payload => {
+    temp.forEach(data => {
+
+        if(data.payload.users !== undefined) {
             return (
+                table.push(
+                    <tr key={data.payload.id}>
+                        <td>
+                            {data.payload.name}
+                        </td>
+                        <td>
+                            {data.payload.position}
+                        </td>
+                        <td>
+                            {data.payload.securityLevel}
+                        </td>
+                    </tr>
+                )
+
+            )
+        }
+    })
+    return table;
+};
+
+const workOrders = (ledger, flag) => {
+    const table = [];
+    const temp = [];
+    ledger.forEach(e => temp.push(JSON.parse(e)))
+    temp.forEach(payload => {
+        return (
                 table.push(
                     <tr key={payload.id}>
                         <td>
@@ -99,6 +84,7 @@ const workOrders = ledger => {
                         </td>
                     </tr>
                 )
+
             )
         })
     return table;
