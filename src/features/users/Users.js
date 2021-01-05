@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
     setName,
-    setDeadline,
-    setTitle,
-    setNote,
+    setPosition,
+    setSecurityLevel,
     selectIssue,
 } from './userSlice';
 import { setIssue } from '../home/homeSlice';
@@ -25,7 +24,7 @@ export function Users() {
 
     return (
         <div>
-            <h1 className={styles.row}>Generate Ticket</h1>
+            <h1 className={styles.row}>Add New Employee</h1>
             <div className={styles.row}>
                 <label>
                     Technician Name:
@@ -38,38 +37,23 @@ export function Users() {
                     </input>
                 </label>
                 <label>
-                    Issue Title:
+                    Position:
                     <input
                         type="text"
-                        onChange={event => {event.persist(); dispatch(setTitle(event.target.value))}}
-                        placeholder="Broken Screen - Laptop"
+                        onChange={event => {event.persist(); dispatch(setPosition(event.target.value))}}
+                        placeholder="Service Technician"
                     >
                     </input>
                 </label>
                 <label>
-                    Additional Notes:
-                    <textarea
-                        onChange={event => {event.persist(); dispatch(setNote(event.target.value))}}
-                        placeholder="Equipment request, rescheduling, etc."
-                    >
-                    </textarea>
+                    Security Level:
+                    <select>
+                        <option value="1">I</option>
+                        <option value="2">II</option>
+                        <option value="3">III</option>
+                    </select>
                 </label>
-                <label>
-                    Due Date:
-                    <div>
-                        <SingleDatePicker
-                            date={chosenDate} // momentPropTypes.momentObj or null
-                            onDateChange={
-                                date => {
-                                    dispatch(setDeadline(moment(date).format('MMMM d, YYYY')));
-                                    setChosenDate(date);
-                                }
-                            } // PropTypes.func.isRequired
-                            focused={focusedInput} // PropTypes.bool
-                            onFocusChange={({ focused }) => setFocusedInput(focused)} // PropTypes.func.isRequired
-                        />
-                    </div>
-                </label>
+
                 <button
                     className={styles.button}
                     onClick={

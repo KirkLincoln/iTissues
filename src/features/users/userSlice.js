@@ -1,31 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 import moment from "moment";
+import { submitEmployee } from '../home/homeSlice'
 
 export const userSlice = createSlice({
-    name: 'issue',
+    name: 'user',
     initialState: {
-        tname: "",
-        deadline: moment().format('MMMM d, YYYY'),
-        title: "",
-        note: "",
+        name: "",
+        position: "",
+        securityLevel: "",
     },
     reducers: {
         setName: (state, action) => {
-            state.tname = action.payload;
+            state.name = action.payload;
         },
-        setDeadline: (state, action) => {
-            state.deadline = action.payload;
+        setPosition: (state, action) => {
+            state.position = action.payload;
         },
-        setTitle: (state, action) => {
-            state.title = action.payload;
-        },
-        setNote: (state, action) => {
-            state.note = action.payload;
+        setSecurityLevel: (state, action) => {
+            state.securityLevel = action.payload;
         },
     },
 });
 
-export const { setName, setDeadline, setTitle, setNote, setIssue } = userSlice.actions;
+export const { setName, setPosition, setSecurityLevel, submitEmployee } = userSlice.actions;
 
 
 // The function below is called a thunk and allows us to perform async logic. It

@@ -1,8 +1,12 @@
 import React from 'react';
-import { Issue } from './features/issue/Issue';
-import './App.css';
 import { Home } from './features/home/Home';
+import { Issue } from './features/issue/Issue';
+import { Users } from "./features/users/Users";
 import { Route, Switch, Link} from 'react-router-dom';
+
+
+import './App.css';
+
 
 function App() {
   return (
@@ -12,6 +16,7 @@ function App() {
               <Switch>
                   <Route exact path="/" component={Home}/>
                   <Route path="/work-order" component={Issue}/>
+                  <Route path="/users" component={Users}/>
               </Switch>
       </header>
     </div>
