@@ -1,17 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
 import { Issue } from './features/issue/Issue';
-// import { Counter } from './features/counter/Counter'
 import './App.css';
 import { Home } from './features/home/Home';
-import { createBrowserHistory } from 'history';
 import { Route, Switch, Link} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-          <NavBar />
+        <NavBar />
+        <header className="App-header">
               <Switch>
                   <Route exact path="/" component={Home}/>
                   <Route path="/work-order" component={Issue}/>
@@ -24,7 +21,7 @@ function App() {
 const NavBar = () => {
     return (
         <div>
-            <nav>
+            <nav className="Navbar">
                 <ul>
                     <li>
                         <Link to="/">Home</Link>

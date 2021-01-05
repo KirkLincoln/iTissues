@@ -1,34 +1,53 @@
 import { createSlice } from '@reduxjs/toolkit';
+const { uuid } = require('uuidv4');
+
+const loadState = () => {
+    try {
+        let ledger = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            let serializedStateKey = localStorage.key(i);
+            if(!serializedStateKey.search('ticketState')) {
+                ledger.push(localStorage.getItem(serializedStateKey))
+            }
+        }
+        const serializedState = "";
+        if (serializedState === null) {
+            return undefined;
+        }
+        console.log(ledger);
+        return ledger;
+        //return JSON.parse(serializedState);
+    } catch (err) {
+        return undefined;
+    }
+};
+
+const saveState = async (state) => {
+    try {
+        const serializedState = JSON.stringify(state);
+        await localStorage.setItem('ticketState' + uuid(), serializedState);
+    } catch {
+
+    }
+};
 
 export const homeSlice = createSlice({
-    name: 'issue',
+    name: 'master',
     initialState: {
-        tname: "",
-        deadline: "",
-        title: "",
-        note: "",
-        issues: [],
+        issues: loadState(),
     },
     reducers: {
-        setName: (state, action) => {
-            state.tname = action.payload;
-        },
-        setDeadline: (state, action) => {
-            state.deadline = action.payload;
-        },
-        setTitle: (state, action) => {
-            state.title = action.payload;
-        },
-        setNote: (state, action) => {
-            state.note = action.payload;
-        },
-        setIssues: (state, action) => {
-            state.issues = action.payload;
-        },
+        setIssue: (state, action) => {
+                saveState(action.payload).then(
+                    res => {
+                        return res;
+                    });
+
+        }
     },
 });
 
-export const { setName, setDeadline, setTitle, setNote, setIssue } = homeSlice.actions;
+export const { setIssue } = homeSlice.actions;
 
 
 // The function below is called a thunk and allows us to perform async logic. It

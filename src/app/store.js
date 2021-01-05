@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import masterReducer from '../features/master/masterSlice';
+import masterReducer from '../features/home/homeSlice';
 import issueReducer from '../features/issue/issueSlice';
 
 export default configureStore({

@@ -6,16 +6,16 @@ import {
     setTitle,
     setNote,
     selectIssue,
-} from './issueSlice';
+} from './userSlice';
 import { setIssue } from '../home/homeSlice';
 import moment from 'moment';
 import 'react-dates/initialize';
 import {  SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
-import styles from './Issue.module.css';
+import styles from './User.module.css';
 import { Redirect } from 'react-router-dom';
 
-export function Issue() {
+export function Users() {
     const issue = useSelector(selectIssue);
     const dispatch = useDispatch();
     const date = moment();
