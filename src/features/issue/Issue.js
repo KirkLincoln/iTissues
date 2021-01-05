@@ -7,18 +7,13 @@ import {
     setNote,
     selectIssue,
 } from './issueSlice';
-import { setIssue } from '../Master/masterSlice';
-import { useStore } from 'react-redux';
+import { setIssue } from '../master/masterSlice';
 import moment from 'moment';
 import 'react-dates/initialize';
 import {  SingleDatePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import styles from './Issue.module.css';
-import { Home } from '../home/Home';
 import { Redirect } from 'react-router-dom';
-import {createStore} from "@reduxjs/toolkit";
-
-
 
 export function Issue() {
     const issue = useSelector(selectIssue);
@@ -27,16 +22,6 @@ export function Issue() {
     const [chosenDate, setChosenDate] = useState(date);
     const [focusedInput, setFocusedInput] = useState(null);
     const [redirect, setRedirect] = useState(false);
-    const axios = require('axios');
-
-    // const sendDate = async date => {
-    //     const tempDate = date.format('MM-DD-YYYY')
-    //     await dispatch(setDeadline(tempDate))
-    // }
-
-    // sendDate(date).then(r => r);
-
-
 
     return (
         <div>
